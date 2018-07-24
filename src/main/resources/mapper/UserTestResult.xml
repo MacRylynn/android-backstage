@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--按照mybatis的格式定义mapper-->
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--接口的命名空间一定是dao层里面有的-->
+<mapper namespace="com.lee.android.dao.UserTestResultDao">
+    <!--//数据库返回所有数据信息的方法，在UserTestResultDao里面定义，在UserTestResult.xml里面实现-->
+    <select id="queryUserTestResult" resultType="com.lee.android.entity.UserTestResult">
+		        SELECT test_result_id,test_result_user,test_result,test_image
+		        FROM test_results
+		     </select>
+
+    <!--//数据库查的方法，在UserTestResultDao里面定义，在UserTestResult.xml里面实现-->
+    <select id="queryUserTestResultById" resultType="com.lee.android.entity.UserTestResult">
+		             SELECT test_result_id,test_result_user,test_result,test_image
+		             FROM test_results
+		             WHERE
+-- 		            userTestId为传进来的数字
+		            test_result_id = #{testResultId}
+		      </select>
+
+    <!--//数据库增的方法，在UserTestResultDao里面定义，在UserTestResult.xml里面实现-->
+    <!--useGeneratedKeys="true"一旦insert成功就返回一个主键（userTestId）的值并且和test_result_id一列绑定,这两个的名字一定要用这种格式-->
+    <!--从parameterType这个类里面去获取值 (#{userName},#{userTestResult},#{testImage})-->
+    <insert id="insertUserTestResult" useGeneratedKeys="true" keyProperty="testResultId" keyColumn="test_result_id"
+            parameterType="com.lee.android.entity.UserTestResult">
+		        INSERT INTO
+		       test_results(test_result_user,test_result,test_image)
+		        VALUES
+		        (#{testResultUser},#{testResult},#{testImage})
+		    </insert>
+
+    <!--//数据库改的方法，在UserTestResultDao里面定义，在UserTestResult.xml里面实现-->
+    <!--一定要记得在每一个项后面加逗号，最后一项不加!!!!!!!-->
+    <update id="updateUserTestResult" parameterType="com.lee.android.entity.UserTestResult">
+        UPDATE test_results
+        <set>
+            <if test="testResultUser!=null">test_result_user = #{testResultUser},</if>
+            <if test="testResult!=null">test_result = #{testResult},</if>
+            <if test="testImage!=null">test_image = #{testImage}</if>
+        </set>
+        WHERE
+        test_result_id = #{testResultId}
+    </update>
+
+    <!--//数据库删除的方法，在UserTestResultDao里面定义，在UserTestResult.xml里面实现-->
+    <delete id="deleteUserTestResult">
+		          DELETE FROM
+		          test_results
+		          WHERE
+		          test_result_id = #{testResultId}
+		    </delete>
+</mapper>

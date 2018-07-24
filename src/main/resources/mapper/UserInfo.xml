@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!--按照mybatis的格式定义mapper-->
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--接口的命名空间一定是dao层里面有的-->
+<mapper namespace="com.lee.android.dao.UserInfoDao">
+    <!--//数据库返回所有数据信息的方法，在UserInfoDao里面定义，在UserInfo里面实现-->
+    <select id="queryUserInfo" resultType="com.lee.android.entity.UserInfo">
+        SELECT user_id,user_name,user_password
+        FROM user_info
+     </select>
+
+    <!--//数据库查的方法，在UserInfoDao里面定义，在UserInfo里面实现-->
+    <select id="queryUserInfoById" resultType="com.lee.android.entity.UserInfo">
+             SELECT user_id,user_name,user_password
+             FROM user_info
+             WHERE
+--              userId为传进来的数字
+             user_id = #{userId}
+      </select>
+
+    <!--//数据库增的方法，在UserInfoDao里面定义，在UserInfo里面实现-->
+    <!--useGeneratedKeys="true"一旦insert成功就返回一个主键（userId）的值并且和ser_id一列绑定-->
+    <!--从parameterType这个类里面去获取值 (#{userName},#{userPassword},#{logTimes})-->
+    <insert id="insertUserInfo" useGeneratedKeys="true" keyProperty="userId" keyColumn="user_id"
+            parameterType="com.lee.android.entity.UserInfo">
+        INSERT INTO
+        user_info(user_name,user_password)
+        VALUES
+        (#{userName},#{userPassword})
+    </insert>
+
+    <!--//数据库改的方法，在UserInfoDao里面定义，在UserInfo里面实现-->
+    <!--一定要记得在每一个项后面加逗号，最后一项不加!!!!!!!-->
+    <update id="updateUserInfo" parameterType="com.lee.android.entity.UserInfo">
+        UPDATE user_info
+        <set>
+            <if test="userName!=null">user_name = #{userName},</if>
+            <if test="userPassword!=null">user_password = #{userPassword}</if>
+        </set>
+        WHERE
+        user_id = #{userId}
+    </update>
+
+    <!--//数据库删除的方法，在UserInfoDao里面定义，在UserInfo里面实现-->
+    <delete id="deleteUserInfo">
+          DELETE FROM
+          user_info
+          WHERE
+           user_id = #{userId}
+    </delete>
+</mapper>
