@@ -1,7 +1,10 @@
 package com.lee.android.web;
 
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.lee.android.entity.UserInfo;
+import com.lee.android.entity.UserTestResult;
 import com.lee.android.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -34,11 +37,13 @@ public class UserInfoController {
     //返回所有的用户信息
     @RequestMapping(value = "/userlist", method = RequestMethod.GET)
     //返回的是一个map对象(键值对)key是String value是Object
-    private Map<String, Object> ListUserInfo() {
-        Map<String, Object> modelMap = new HashMap<String, Object>();
+    public ModelAndView ListUserInfo(@RequestParam(required = false,defaultValue = "1",value = "pn")Integer pn) {
+        ModelAndView model = new ModelAndView("show_users");
         List<UserInfo> List = userInfoService.getUserInfoList();//获取所有用户信息列表
-        modelMap.put("UserInfoList", List);
-        return modelMap;
+        PageHelper.startPage(pn,800);
+        PageInfo<UserInfo> pageInfo = new PageInfo<UserInfo>(List);
+        model.addObject("pageInfo",pageInfo);
+        return model;
     }
     @RequestMapping(value = "/getoneuser", method = RequestMethod.GET)
     private Map<String, Object> getUserInfoById(Integer userId) {
