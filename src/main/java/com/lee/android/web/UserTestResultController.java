@@ -28,7 +28,7 @@ public class UserTestResultController {
     public ModelAndView ListUserTestResult(@RequestParam(required = false,defaultValue = "1",value = "pn")Integer pn) {
 
         ModelAndView model = new ModelAndView("show_results");
-        PageHelper.startPage(pn,800);
+        PageHelper.startPage(pn,8);
         List<UserTestResult> List = userTestResultService.getUserTestResultList();//获取所有用户信息列表
         PageInfo<UserTestResult> pageInfo = new PageInfo<UserTestResult>(List);
         model.addObject("pageInfo",pageInfo);

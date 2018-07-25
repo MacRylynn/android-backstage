@@ -42,6 +42,48 @@
         </div>
     </div>
 </div>
+<!--分页-->
+<nav aria-label="Page navigation" style="text-align: center;">
+    <ul class="pagination" >
+
+        <!--首页-->
+        <li>
+            <a th:href="@{/web/results?pn=1}">首页</a>
+        </li>
+
+        <!--上一页-->
+        <li>
+            <a
+                    th:if="${pageInfo.hasPreviousPage} == true"
+                    th:href="@{/web/results?(pn=${pageInfo.pageNum}-1)}" aria-label="Previous">上一页</a>
+
+        </li>
+
+        <!--循环遍历连续显示的页面，若是当前页就高亮显示-->
+        <!--这里的th:class真是精髓！！！！细心体会-->
+        <li th:each="page_num:${pageInfo.navigatepageNums}" th:class="${page_num}==${pageInfo.pageNum}?active">
+            <a th:href="@{/web/results?(pn=${page_num})}" th:text="${page_num}"></a>
+        </li>
+
+
+        <!--下一页-->
+        <li>
+            <a
+                    th:if="${pageInfo.hasNextPage} == true"
+                    th:href="@{/web/results?(pn=${pageInfo.pageNum}+1)}" aria-label="Next">下一页</a>
+
+        </li>
+
+        <!--尾页-->
+        <li>
+            <a th:href="@{/web/results?(pn=${pageInfo.pages})}">尾页</a>
+        </li>
+
+
+
+    </ul>
+</nav>
+
 
 
 </body>

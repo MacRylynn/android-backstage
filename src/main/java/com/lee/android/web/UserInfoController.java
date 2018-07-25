@@ -40,7 +40,7 @@ public class UserInfoController {
     public ModelAndView ListUserInfo(@RequestParam(required = false,defaultValue = "1",value = "pn")Integer pn) {
         ModelAndView model = new ModelAndView("show_users");
         List<UserInfo> List = userInfoService.getUserInfoList();//获取所有用户信息列表
-        PageHelper.startPage(pn,800);
+        PageHelper.startPage(pn,8);
         PageInfo<UserInfo> pageInfo = new PageInfo<UserInfo>(List);
         model.addObject("pageInfo",pageInfo);
         return model;
