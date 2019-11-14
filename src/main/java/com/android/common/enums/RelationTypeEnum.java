@@ -15,7 +15,7 @@ public enum RelationTypeEnum {
     BROTHER("MEDIA_FILE", "兄弟"),
     SISTER("SISTER", "姐妹"),
     CHILDREN("CHILDREN", "子女"),
-    OTHERS("COOPERATE_FILE", "其他"),
+    OTHERS("OTHERS", "其他"),
     ;
     private String code;
     private String desc;

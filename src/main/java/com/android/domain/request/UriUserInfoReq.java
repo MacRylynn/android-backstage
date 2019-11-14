@@ -53,6 +53,31 @@ public class UriUserInfoReq implements Serializable {
      * 患病时间（若有）
      */
     private Date registrationTime;
+    /**
+     * 关系类型RelationTypeEnum(PARENTS,父母;SELF,自己;BROTHER,兄弟;SISTER,姐妹;CHILDREN,子女;OTHERS,其他)
+     */
+    private String relationType;
+
+    /**
+     * 用户编号(系统内部使用)
+     */
+    private String userCode;
+
+    public String getUserCode() {
+        return userCode;
+    }
+
+    public void setUserCode(String userCode) {
+        this.userCode = userCode;
+    }
+
+    public String getRelationType() {
+        return relationType;
+    }
+
+    public void setRelationType(String relationType) {
+        this.relationType = relationType;
+    }
 
     public Long getId() {
         return id;
@@ -120,19 +145,17 @@ public class UriUserInfoReq implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", userAge=").append(userAge);
-        sb.append(", userCareer=").append(userCareer);
-        sb.append(", userName=").append(userName);
-        sb.append(", userPhone=").append(userPhone);
-        sb.append(", userAddress=").append(userAddress);
-        sb.append(", everUriSick=").append(everUriSick);
-        sb.append(", registrationTime=").append(registrationTime);
-        sb.append("]");
-        return sb.toString();
+        return "UriUserInfoReq{" +
+                "id=" + id +
+                ", userAge=" + userAge +
+                ", userCareer='" + userCareer + '\'' +
+                ", userName='" + userName + '\'' +
+                ", userPhone='" + userPhone + '\'' +
+                ", userAddress='" + userAddress + '\'' +
+                ", everUriSick='" + everUriSick + '\'' +
+                ", registrationTime=" + registrationTime +
+                ", relationType='" + relationType + '\'' +
+                ", userCode='" + userCode + '\'' +
+                '}';
     }
 }

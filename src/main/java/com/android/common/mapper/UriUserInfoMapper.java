@@ -3,6 +3,7 @@ package com.android.common.mapper;
 import com.android.common.entity.UriUserInfoEntity;
 import org.apache.ibatis.annotations.Mapper;
 
+
 @Mapper
 public interface UriUserInfoMapper {
     int deleteByPrimaryKey(Long id);

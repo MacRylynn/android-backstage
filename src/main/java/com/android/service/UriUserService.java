@@ -1,6 +1,7 @@
 package com.android.service;
 
 import com.android.domain.request.UriAccountInfoReq;
+import com.android.domain.request.UriUserInfoReq;
 import com.android.domain.response.UriAccountInfoVo;
 import com.android.domain.response.UriUserInfoVo;
 
@@ -23,6 +24,16 @@ public interface UriUserService {
      * @Date: 2019/11/14 10:05
      */
     Boolean addAccount(UriAccountInfoReq req);
+
+    /**
+     * 功能描述: <新增关联用户信息>
+     *
+     * @Param: [req]
+     * @Return: java.lang.Boolean
+     * @Author: lijiao73
+     * @Date: 2019/11/14 15:27
+     */
+    Boolean addRelationUser(UriUserInfoReq req);
 
     /**
      * 功能描述: <用户登录服务>
@@ -52,7 +63,7 @@ public interface UriUserService {
      * @Author: lijiao73
      * @Date: 2019/11/14 10:12
      */
-    List<UriAccountInfoVo> queryAllCount();
+    List<UriAccountInfoVo> queryAllACount();
 
     /**
      * 功能描述: <根据账户获取用户树>
