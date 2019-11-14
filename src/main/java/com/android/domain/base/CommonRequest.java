@@ -1,12 +1,12 @@
 package com.android.domain.base;
 
 /**
- * @ClassName CommomRequest
+ * @ClassName CommonRequest
  * @Description 公共请求参数
  * @Author: lijiao73
  * @Date: 2019/11/14 9:10
  */
-public class CommomRequest<T> {
+public class CommonRequest<T> {
     private T requestData;
 
     public T getRequestData() {
@@ -19,7 +19,7 @@ public class CommomRequest<T> {
 
     @Override
     public String toString() {
-        return "CommomRequest{" +
+        return "CommonRequest{" +
                 "requestData=" + requestData +
                 '}';
     }
