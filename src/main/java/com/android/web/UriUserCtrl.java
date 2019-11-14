@@ -5,6 +5,8 @@ import com.android.domain.base.CommonRequest;
 import com.android.domain.base.CommonResponse;
 import com.android.domain.request.UriAccountInfoReq;
 import com.android.domain.request.UriUserInfoReq;
+import com.android.domain.response.UriAccountInfoVo;
+import com.android.domain.response.UriUserInfoVo;
 import com.android.service.UriUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 
 /**
@@ -57,14 +60,46 @@ public class UriUserCtrl {
 
     @PostMapping("/login")
     public CommonResponse<Boolean> login(CommonRequest<UriAccountInfoReq> commonRequest) {
-        logger.info("UriUserCtrl|addUser，账户用户控制层|新增用户信息，入参为：{}", commonRequest.toString());
+        logger.info("UriUserCtrl|login，账户用户控制层|账户登录，入参为：{}", commonRequest.toString());
         CommonResponse<Boolean> res = new CommonResponse<>();
         Boolean result = uriUserService.accountLogin(commonRequest.getRequestData());
         res.setResultData(result);
         return res;
     }
 
+    @PostMapping("/selectuser")
+    public CommonResponse<UriAccountInfoVo> queryAccountById(CommonRequest<UriAccountInfoReq> commonRequest) {
+        logger.info("UriUserCtrl|queryAccountById，账户用户控制层|查询用户信息，入参为：{}", commonRequest.toString());
+        CommonResponse<UriAccountInfoVo> res = new CommonResponse<>();
+        UriAccountInfoVo result = uriUserService.queryAccountById(commonRequest.getRequestData());
+        res.setResultData(result);
+        return res;
+    }
 
+    @PostMapping("/selectallaccount")
+    public CommonResponse<List<UriAccountInfoVo>> queryAllACount(CommonRequest commonRequest) {
+        logger.info("UriUserCtrl|queryAllACount，账户用户控制层|查询所有账户信息，入参为：{}", commonRequest.toString());
+        CommonResponse<List<UriAccountInfoVo>> res = new CommonResponse<>();
+        List<UriAccountInfoVo> result = uriUserService.queryAllACount();
+        res.setResultData(result);
+        return res;
+    }
 
+    @PostMapping("/selectaccountuser")
+    public CommonResponse<List<UriUserInfoVo>> queryUserByAccountId(CommonRequest<UriAccountInfoReq> commonRequest) {
+        logger.info("UriUserCtrl|queryUserByAccountId，账户用户控制层|根据账户id查询关联用户，入参为：{}", commonRequest.toString());
+        CommonResponse<List<UriUserInfoVo>> res = new CommonResponse<>();
+        List<UriUserInfoVo> result = uriUserService.queryUserByAccountId(commonRequest.getRequestData());
+        res.setResultData(result);
+        return res;
+    }
 
+    @PostMapping("/selectallaccount")
+    public CommonResponse<Boolean> modifyAccount(CommonRequest<UriAccountInfoReq> commonRequest) {
+        logger.info("UriUserCtrl|modifyAccount，账户用户控制层|修改账户信息，入参为：{}", commonRequest.toString());
+        CommonResponse<Boolean> res = new CommonResponse<>();
+        Boolean result = uriUserService.modifyAccount(commonRequest.getRequestData());
+        res.setResultData(result);
+        return res;
+    }
 }
