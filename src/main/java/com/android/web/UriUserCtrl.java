@@ -10,10 +10,7 @@ import com.android.domain.response.UriUserInfoVo;
 import com.android.service.UriUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
@@ -41,7 +38,7 @@ public class UriUserCtrl {
     }
 
     @PostMapping("/addaccount")
-    public CommonResponse<Boolean> addAccount(CommonRequest<UriAccountInfoReq> commonRequest) {
+    public CommonResponse<Boolean> addAccount(@RequestBody CommonRequest<UriAccountInfoReq> commonRequest) {
         logger.info("UriUserCtrl|addAccount，账户用户控制层|新增账户信息，入参为：{}", commonRequest.toString());
         CommonResponse<Boolean> res = new CommonResponse<>();
         Boolean result = uriUserService.addAccount(commonRequest.getRequestData());
@@ -50,7 +47,7 @@ public class UriUserCtrl {
     }
 
     @PostMapping("/adduser")
-    public CommonResponse<Boolean> addUser(CommonRequest<UriUserInfoReq> commonRequest) {
+    public CommonResponse<Boolean> addUser(@RequestBody CommonRequest<UriUserInfoReq> commonRequest) {
         logger.info("UriUserCtrl|addUser，账户用户控制层|新增用户信息，入参为：{}", commonRequest.toString());
         CommonResponse<Boolean> res = new CommonResponse<>();
         Boolean result = uriUserService.addRelationUser(commonRequest.getRequestData());
@@ -59,7 +56,7 @@ public class UriUserCtrl {
     }
 
     @PostMapping("/login")
-    public CommonResponse<Boolean> login(CommonRequest<UriAccountInfoReq> commonRequest) {
+    public CommonResponse<Boolean> login(@RequestBody CommonRequest<UriAccountInfoReq> commonRequest) {
         logger.info("UriUserCtrl|login，账户用户控制层|账户登录，入参为：{}", commonRequest.toString());
         CommonResponse<Boolean> res = new CommonResponse<>();
         Boolean result = uriUserService.accountLogin(commonRequest.getRequestData());
@@ -68,7 +65,7 @@ public class UriUserCtrl {
     }
 
     @PostMapping("/selectuser")
-    public CommonResponse<UriAccountInfoVo> queryAccountById(CommonRequest<UriAccountInfoReq> commonRequest) {
+    public CommonResponse<UriAccountInfoVo> queryAccountById(@RequestBody CommonRequest<UriAccountInfoReq> commonRequest) {
         logger.info("UriUserCtrl|queryAccountById，账户用户控制层|查询用户信息，入参为：{}", commonRequest.toString());
         CommonResponse<UriAccountInfoVo> res = new CommonResponse<>();
         UriAccountInfoVo result = uriUserService.queryAccountById(commonRequest.getRequestData());
@@ -77,7 +74,7 @@ public class UriUserCtrl {
     }
 
     @PostMapping("/selectallaccount")
-    public CommonResponse<List<UriAccountInfoVo>> queryAllACount(CommonRequest commonRequest) {
+    public CommonResponse<List<UriAccountInfoVo>> queryAllACount(@RequestBody CommonRequest commonRequest) {
         logger.info("UriUserCtrl|queryAllACount，账户用户控制层|查询所有账户信息，入参为：{}", commonRequest.toString());
         CommonResponse<List<UriAccountInfoVo>> res = new CommonResponse<>();
         List<UriAccountInfoVo> result = uriUserService.queryAllACount();
@@ -86,7 +83,7 @@ public class UriUserCtrl {
     }
 
     @PostMapping("/selectaccountuser")
-    public CommonResponse<List<UriUserInfoVo>> queryUserByAccountId(CommonRequest<UriAccountInfoReq> commonRequest) {
+    public CommonResponse<List<UriUserInfoVo>> queryUserByAccountId(@RequestBody CommonRequest<UriAccountInfoReq> commonRequest) {
         logger.info("UriUserCtrl|queryUserByAccountId，账户用户控制层|根据账户id查询关联用户，入参为：{}", commonRequest.toString());
         CommonResponse<List<UriUserInfoVo>> res = new CommonResponse<>();
         List<UriUserInfoVo> result = uriUserService.queryUserByAccountId(commonRequest.getRequestData());
@@ -95,7 +92,7 @@ public class UriUserCtrl {
     }
 
     @PostMapping("/selectallaccount")
-    public CommonResponse<Boolean> modifyAccount(CommonRequest<UriAccountInfoReq> commonRequest) {
+    public CommonResponse<Boolean> modifyAccount(@RequestBody CommonRequest<UriAccountInfoReq> commonRequest) {
         logger.info("UriUserCtrl|modifyAccount，账户用户控制层|修改账户信息，入参为：{}", commonRequest.toString());
         CommonResponse<Boolean> res = new CommonResponse<>();
         Boolean result = uriUserService.modifyAccount(commonRequest.getRequestData());

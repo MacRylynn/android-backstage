@@ -1,5 +1,7 @@
 package com.android.common.util;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import java.io.Serializable;
 
 /**
@@ -9,10 +11,9 @@ import java.io.Serializable;
  * @Date: 2019/11/13 17:11
  */
 public class ImageProcess implements Serializable {
-    private String result;
 
-    //todo 静态方法，处理结果只有一个
-    private String imageProcess() {
-        return this.result;
+    // 调用算法处理
+    public static String imageProcess(MultipartFile file) {
+        return "test result";
     }
 }
