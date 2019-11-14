@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <configuration scan="true">
-    <property name="APP" value="megrez-loan-manager"/>
+    <property name="APP" value="android-backstage"/>
     <property name="LOG_HOME" value="/export/log/${APP}"/>
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
