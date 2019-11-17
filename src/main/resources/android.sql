@@ -44,6 +44,44 @@ CREATE TABLE `uri_check_result` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='检测结果表';
 
+-- ----------------------------
+-- Records of uri_account_info
+-- ----------------------------
+INSERT INTO `uri_account_info` VALUES ('1', 'CO201911171652', 'admin', 'admin', 'admin', '2019-11-17 16:52:30');
+
+-- ----------------------------
+-- Records of uri_check_result
+-- ----------------------------
+INSERT INTO `uri_check_result` VALUES ('1', '1', '[1,1,1,1,1,1,1,1,1,1,1,1,1,1]', '2019-11-17 16:59:47', 'temp/path/1.png');
+INSERT INTO `uri_check_result` VALUES ('2', '1', '[1,1,1,1,1,1,1,1,1,1,1,1,1,1]', '2019-11-17 17:00:15', 'temp/path/2.png');
+INSERT INTO `uri_check_result` VALUES ('3', '1', '[1,2,3,6,5,4,8,9,7,4,8,5,4,7]', '2019-11-17 17:00:33', 'temp/path/2.png');
+INSERT INTO `uri_check_result` VALUES ('4', '2', '[1,2,3,6,5,4,8,9,7,4,8,5,4,7]', '2019-11-17 17:00:53', 'temp/path/2.png');
+INSERT INTO `uri_check_result` VALUES ('5', '2', '[1,2,3,6,5,4,8,9,7,4,8,5,4,7]', '2019-11-17 17:01:06', 'temp/path/2.png');
+INSERT INTO `uri_check_result` VALUES ('6', '2', '[1,2,3,6,5,4,8,9,7,4,8,5,4,7]', '2019-11-17 17:01:14', 'temp/path/2.png');
+
+-- ----------------------------
+-- Records of uri_user_info
+-- ----------------------------
+INSERT INTO `uri_user_info` VALUES ('1', '25', '医生', '张武', '18969396874', '逸夫楼505', 'NO', '2019-11-17 16:55:46');
+INSERT INTO `uri_user_info` VALUES ('2', '38', '研究院', '张武', '18969396874', '逸夫楼505', 'NO', '2019-11-17 16:55:52');
+INSERT INTO `uri_user_info` VALUES ('3', '36', '银行职员', '张武', '18969396874', '逸夫楼505', 'NO', '2019-11-17 16:56:52');
+INSERT INTO `uri_user_info` VALUES ('4', '19', '学生', '张武', '18969396874', '逸夫楼505', 'NO', '2019-11-17 16:56:55');
+INSERT INTO `uri_user_info` VALUES ('5', '15', '学生', '张武', '18969396874', '逸夫楼505', 'NO', '2019-11-17 16:56:57');
+INSERT INTO `uri_user_info` VALUES ('6', '24', '护士', '张武', '18969396874', '逸夫楼505', 'NO', '2019-11-17 16:57:00');
+INSERT INTO `uri_user_info` VALUES ('7', '2', '无', '张武', '18969396874', '逸夫楼505', 'NO', '2019-11-17 16:57:02');
+INSERT INTO `uri_user_info` VALUES ('8', '80', '无', '张武', '18969396874', '逸夫楼505', 'YES', '2019-11-17 16:57:05');
+-- ----------------------------
+-- Records of uri_user_relation
+-- ----------------------------
+INSERT INTO `uri_user_relation` VALUES ('1', 'CO201911171652', '1', 'SELF');
+INSERT INTO `uri_user_relation` VALUES ('2', 'CO201911171652', '2', 'FATHER');
+INSERT INTO `uri_user_relation` VALUES ('3', 'CO201911171652', '3', 'MOTHER');
+INSERT INTO `uri_user_relation` VALUES ('4', 'CO201911171652', '4', 'BROTHER');
+INSERT INTO `uri_user_relation` VALUES ('5', 'CO201911171652', '5', 'SISTER');
+INSERT INTO `uri_user_relation` VALUES ('6', 'CO201911171652', '6', 'SPOUSE');
+INSERT INTO `uri_user_relation` VALUES ('7', 'CO201911171652', '7', 'CHILDREN');
+INSERT INTO `uri_user_relation` VALUES ('8', 'CO201911171652', '8', 'OTHERS');
+
 
 
 
