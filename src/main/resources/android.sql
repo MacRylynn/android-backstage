@@ -24,8 +24,8 @@ CREATE TABLE `uri_user_info` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='用户基本信息表';
 
-DROP TABLE IF EXISTS `uri_check_result`;
-CREATE TABLE `uri_check_result` (
+DROP TABLE IF EXISTS `uri_user_relation`;
+CREATE TABLE `uri_user_relation`(
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id',
   `user_code` varchar(40)  NOT NULL COMMENT '用户编号(系统内部使用)',
   `user_id` bigint(20)  NOT NULL COMMENT '用户id（与user表关联）',
@@ -34,7 +34,7 @@ CREATE TABLE `uri_check_result` (
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='用户关系表';
 
 
-DROP TABLE IF EXISTS `uri_check_result`;
+DROP TABLE IF EXISTS `uri_check_result`; 
 CREATE TABLE `uri_check_result` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id',
   `user_id` bigint(20)  NOT NULL COMMENT '用户id（与user表关联）',
