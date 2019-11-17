@@ -76,7 +76,7 @@ public class UriUserServiceImpl implements UriUserService {
     }
 
     @Override
-    public Boolean accountLogin(UriAccountInfoReq req) {
+    public Long accountLogin(UriAccountInfoReq req) {
         logger.info("UriUserServiceImpl|accountLogin,用户管理服务|用户登录，参数为：{}", req.toString());
         UriAccountInfoEntity uriAccountInfoEntity = uriAccountInfoMapper.selectByAccountNo(req.getAccountNo());
         if (uriAccountInfoEntity == null) {
@@ -85,7 +85,7 @@ public class UriUserServiceImpl implements UriUserService {
         }
         if (req.getAccountPassword().equals(uriAccountInfoEntity.getAccountPassword())) {
             logger.info("UriUserServiceImpl|accountLogin,用户管理服务|用户登录，成功登陆，参数为：{}", req.toString());
-            return true;
+            return uriAccountInfoEntity.getId();
         } else {
             logger.error("UriUserServiceImpl|accountLogin,用户管理服务|用户登录，登陆密码错误，参数为：{}", req.toString());
             throw new BusinessException("登陆失败，请验证密码输入是否正确");

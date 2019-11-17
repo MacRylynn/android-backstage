@@ -1,6 +1,7 @@
 package com.android.web;
 
 
+import com.android.common.exception.BusinessException;
 import com.android.domain.base.CommonRequest;
 import com.android.domain.base.CommonResponse;
 import com.android.domain.request.UriAccountInfoReq;
@@ -41,8 +42,13 @@ public class UriUserCtrl {
     public CommonResponse<Boolean> addAccount(@RequestBody CommonRequest<UriAccountInfoReq> commonRequest) {
         logger.info("UriUserCtrl|addAccount，账户用户控制层|新增账户信息，入参为：{}", commonRequest.toString());
         CommonResponse<Boolean> res = new CommonResponse<>();
-        Boolean result = uriUserService.addAccount(commonRequest.getRequestData());
-        res.setResultData(result);
+        UriAccountInfoReq req = commonRequest.getRequestData();
+        if (req.getAccountPassword().equals(req.getRepeatAccountPassword())) {
+            Boolean result = uriUserService.addAccount(req);
+            res.setResultData(result);
+        } else {
+            throw new BusinessException("注册失败，两次输入的密码不正确！");
+        }
         return res;
     }
 
@@ -56,11 +62,11 @@ public class UriUserCtrl {
     }
 
     @PostMapping("/login")
-    public CommonResponse<Boolean> login(@RequestBody CommonRequest<UriAccountInfoReq> commonRequest) {
+    public CommonResponse<Long> login(@RequestBody CommonRequest<UriAccountInfoReq> commonRequest) {
         logger.info("UriUserCtrl|login，账户用户控制层|账户登录，入参为：{}", commonRequest.toString());
-        CommonResponse<Boolean> res = new CommonResponse<>();
-        Boolean result = uriUserService.accountLogin(commonRequest.getRequestData());
-        res.setResultData(result);
+        CommonResponse<Long> res = new CommonResponse<>();
+        Long userId = uriUserService.accountLogin(commonRequest.getRequestData());
+        res.setResultData(userId);
         return res;
     }
 
@@ -91,7 +97,7 @@ public class UriUserCtrl {
         return res;
     }
 
-    @PostMapping("/selectallaccount")
+    @PostMapping("/modifyaccount")
     public CommonResponse<Boolean> modifyAccount(@RequestBody CommonRequest<UriAccountInfoReq> commonRequest) {
         logger.info("UriUserCtrl|modifyAccount，账户用户控制层|修改账户信息，入参为：{}", commonRequest.toString());
         CommonResponse<Boolean> res = new CommonResponse<>();

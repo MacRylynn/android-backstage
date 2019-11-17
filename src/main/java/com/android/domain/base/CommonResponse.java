@@ -19,7 +19,7 @@ public class CommonResponse<T> {
     /**
      * 返回信息
      */
-    private String resultMsg = "交易成功";
+    private String resultMsg = "请求成功";
 
     /**
      * 返回数据

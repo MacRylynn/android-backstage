@@ -40,9 +40,22 @@ public class UriAccountInfoReq implements Serializable {
     private String accountPassword;
 
     /**
+     * 密码
+     */
+    private String RepeatAccountPassword;
+
+    /**
      * 注册时间
      */
     private Date registrationTime;
+
+    public String getRepeatAccountPassword() {
+        return RepeatAccountPassword;
+    }
+
+    public void setRepeatAccountPassword(String repeatAccountPassword) {
+        RepeatAccountPassword = repeatAccountPassword;
+    }
 
     public Long getId() {
         return id;
@@ -94,17 +107,14 @@ public class UriAccountInfoReq implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", userCode=").append(userCode);
-        sb.append(", accountNo=").append(accountNo);
-        sb.append(", accountName=").append(accountName);
-        sb.append(", accountPassword=").append(accountPassword);
-        sb.append(", registrationTime=").append(registrationTime);
-        sb.append("]");
-        return sb.toString();
+        return "UriAccountInfoReq{" +
+                "id=" + id +
+                ", userCode='" + userCode + '\'' +
+                ", accountNo='" + accountNo + '\'' +
+                ", accountName='" + accountName + '\'' +
+                ", accountPassword='" + accountPassword + '\'' +
+                ", RepeatAccountPassword='" + RepeatAccountPassword + '\'' +
+                ", registrationTime=" + registrationTime +
+                '}';
     }
 }

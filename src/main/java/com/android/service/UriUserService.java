@@ -39,11 +39,11 @@ public interface UriUserService {
      * 功能描述: <用户登录服务>
      *
      * @Param: [req]
-     * @Return: boolean
+     * @Return: long 用户主键
      * @Author: lijiao73
      * @Date: 2019/11/14 10:07
      */
-    Boolean accountLogin(UriAccountInfoReq req);
+    Long accountLogin(UriAccountInfoReq req);
 
     /**
      * 功能描述: <根据Id来获取账号信息>
