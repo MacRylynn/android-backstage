@@ -83,9 +83,9 @@ public class UriCheckResultCtrl {
         return res;
     }
 
-    @PostMapping(value = "/downloadfile/{id}/{downType}")
-    public void downloadFile(@PathVariable("id") Long id, @PathVariable("downType") String downType, HttpServletResponse resp) throws IOException {
-        logger.info("EnterpriseInfoCtrl|downloadFile|合作方信息基础服务|下载文件|传入参数，查询id：{},下载类型：{}，", id, downType);
+    @PostMapping(value = "/downloadfile/{id}")
+    public void downloadFile(@PathVariable("id") Long id, HttpServletResponse resp) throws IOException {
+        logger.info("EnterpriseInfoCtrl|downloadFile|合作方信息基础服务|下载文件|传入参数，查询id：{}", id);
         UriCheckResultVo result = uriCheckResultService.queryCheckResultById(id);
         String filePath = result.getResultImagePath();
         String fileName = "检测结果";
