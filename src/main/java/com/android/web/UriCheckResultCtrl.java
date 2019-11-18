@@ -57,7 +57,7 @@ public class UriCheckResultCtrl {
         return res;
     }
 
-    @PatchMapping("/selectrecordings")
+    @PostMapping("/selectrecordings")
     public CommonResponse<List<UriCheckResultVo>> queryCheckResultByUserId(@RequestBody CommonRequest<UriUserInfoReq> commonRequest) {
         logger.info("UriUserCtrl|addAccount，账户用户控制层|选择检测结果记录，入参为：{}", commonRequest.toString());
         CommonResponse<List<UriCheckResultVo>> res = new CommonResponse<>();
@@ -67,7 +67,7 @@ public class UriCheckResultCtrl {
         return res;
     }
 
-    @PatchMapping("/selectrecording")
+    @PostMapping("/selectrecording")
     public CommonResponse<UriCheckResultVo> queryCheckResultById(@RequestBody CommonRequest<UriCheckResultReq> commonRequest) {
         logger.info("UriUserCtrl|addAccount，账户用户控制层|选择检测结果记录，入参为：{}", commonRequest.toString());
         CommonResponse<UriCheckResultVo> res = new CommonResponse<>();
