@@ -38,12 +38,6 @@ public class UriCheckResultCtrl {
     @Resource
     private UriCheckResultService uriCheckResultService;
 
-    @GetMapping("/login")
-    public ModelAndView login() {
-        ModelAndView model = new ModelAndView("login"); // 返回login.html页面
-        return model;
-    }
-
     @PostMapping("/addcheckresult")
     public CommonResponse<Boolean> addCheckResult(MultipartFile file, @PathVariable("userId") Long userId) throws IOException {
         logger.info("UriUserCtrl|addAccount，账户用户控制层|新增账户信息，入参为：{}", userId);
