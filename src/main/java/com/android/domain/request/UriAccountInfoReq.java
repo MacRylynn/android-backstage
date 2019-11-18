@@ -49,12 +49,13 @@ public class UriAccountInfoReq implements Serializable {
      */
     private Date registrationTime;
 
+
     public String getRepeatAccountPassword() {
         return repeatAccountPassword;
     }
 
     public void setRepeatAccountPassword(String repeatAccountPassword) {
-        repeatAccountPassword = repeatAccountPassword;
+        this.repeatAccountPassword = repeatAccountPassword;
     }
 
     public Long getId() {
