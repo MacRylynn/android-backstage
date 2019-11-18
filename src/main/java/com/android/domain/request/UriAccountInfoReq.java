@@ -42,7 +42,7 @@ public class UriAccountInfoReq implements Serializable {
     /**
      * 密码
      */
-    private String RepeatAccountPassword;
+    private String repeatAccountPassword;
 
     /**
      * 注册时间
@@ -50,11 +50,11 @@ public class UriAccountInfoReq implements Serializable {
     private Date registrationTime;
 
     public String getRepeatAccountPassword() {
-        return RepeatAccountPassword;
+        return repeatAccountPassword;
     }
 
     public void setRepeatAccountPassword(String repeatAccountPassword) {
-        RepeatAccountPassword = repeatAccountPassword;
+        repeatAccountPassword = repeatAccountPassword;
     }
 
     public Long getId() {
@@ -113,7 +113,7 @@ public class UriAccountInfoReq implements Serializable {
                 ", accountNo='" + accountNo + '\'' +
                 ", accountName='" + accountName + '\'' +
                 ", accountPassword='" + accountPassword + '\'' +
-                ", RepeatAccountPassword='" + RepeatAccountPassword + '\'' +
+                ", RepeatAccountPassword='" + repeatAccountPassword + '\'' +
                 ", registrationTime=" + registrationTime +
                 '}';
     }
