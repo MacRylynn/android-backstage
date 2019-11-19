@@ -40,9 +40,9 @@ public class UriCheckResultCtrl {
     private UriCheckResultService uriCheckResultService;
 
     @PostMapping("/addcheckresult")
-    public CommonResponse<Boolean> addCheckResult(MultipartFile file,long userId) throws IOException {
+    public CommonResponse<Long> addCheckResult(MultipartFile file,long userId) throws IOException {
         logger.info("UriUserCtrl|addAccount，账户用户控制层|新增账户信息，入参为：{}", userId);
-        CommonResponse<Boolean> res = new CommonResponse<>();
+        CommonResponse<Long> res = new CommonResponse<>();
         //todo 开发
         try {
             //1. 保存文件
@@ -55,7 +55,7 @@ public class UriCheckResultCtrl {
             checkResult.setCheckTime(new Date());
             checkResult.setResultImagePath(filePath);
             checkResult.setUserId(userId);
-            Boolean status = uriCheckResultService.addCheckResult(checkResult);
+            Long status = uriCheckResultService.addCheckResult(checkResult);
             res.setResultData(status);
             return res;
         } catch (Exception e) {

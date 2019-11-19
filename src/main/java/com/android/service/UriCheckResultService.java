@@ -19,11 +19,11 @@ public interface UriCheckResultService {
      * 功能描述:<增加检查结果>
      *
      * @Param: [req]
-     * @Return: boolean
+     * @Return: long 返回此次检测记录的主键
      * @Author: lijiao73
      * @Date: 2019/11/14 10:31
      */
-    Boolean addCheckResult(UriCheckResultReq req);
+    Long addCheckResult(UriCheckResultReq req);
 
     /**
      * 功能描述: <根据用户Id获取检测结果>

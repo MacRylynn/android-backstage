@@ -40,12 +40,13 @@ public class UriCheckResultServiceImpl implements UriCheckResultService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Boolean addCheckResult(UriCheckResultReq req) {
+    public Long addCheckResult(UriCheckResultReq req) {
         logger.info("UriCheckResultServiceImpl|addCheckResult,检测结果管理服务|增加检测结果，参数为：{}", req.toString());
         UriCheckResultEntity uriCheckResultEntity = new UriCheckResultEntity();
         BeanUtils.copyProperties(req, uriCheckResultEntity);
-        int res = uriCheckResultMapper.insertSelective(uriCheckResultEntity);
-        return res == 1;
+        uriCheckResultMapper.insertSelective(uriCheckResultEntity);
+        long res = uriCheckResultEntity.getId();
+        return res;
     }
 
     @Override
