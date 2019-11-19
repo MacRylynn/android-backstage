@@ -41,7 +41,7 @@ public class UriUserInfoEntity {
     /**
      * 患病时间（若有）
      */
-    private Date registrationTime;
+    private Date sickTime;
 
     public Long getId() {
         return id;
@@ -99,12 +99,12 @@ public class UriUserInfoEntity {
         this.everUriSick = everUriSick == null ? null : everUriSick.trim();
     }
 
-    public Date getRegistrationTime() {
-        return registrationTime;
+    public Date getSickTime() {
+        return sickTime;
     }
 
-    public void setRegistrationTime(Date registrationTime) {
-        this.registrationTime = registrationTime;
+    public void setSickTime(Date sickTime) {
+        this.sickTime = sickTime;
     }
 
     @Override
@@ -120,7 +120,7 @@ public class UriUserInfoEntity {
         sb.append(", userPhone=").append(userPhone);
         sb.append(", userAddress=").append(userAddress);
         sb.append(", everUriSick=").append(everUriSick);
-        sb.append(", registrationTime=").append(registrationTime);
+        sb.append(", sickTime=").append(sickTime);
         sb.append("]");
         return sb.toString();
     }
