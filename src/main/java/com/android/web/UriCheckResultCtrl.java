@@ -20,6 +20,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.BindException;
 import java.net.URLEncoder;
 import java.util.Date;
 import java.util.List;
@@ -39,22 +40,27 @@ public class UriCheckResultCtrl {
     private UriCheckResultService uriCheckResultService;
 
     @PostMapping("/addcheckresult")
-    public CommonResponse<Boolean> addCheckResult(MultipartFile file, @PathVariable("userId") Long userId) throws IOException {
+    public CommonResponse<Boolean> addCheckResult(MultipartFile file,long userId) throws IOException {
         logger.info("UriUserCtrl|addAccount，账户用户控制层|新增账户信息，入参为：{}", userId);
         CommonResponse<Boolean> res = new CommonResponse<>();
         //todo 开发
-        //1. 保存文件
-        String filePath = uriCheckResultService.uploadMediaFile(file);
-        //2. 进行算法处理
-        String result = ImageProcess.imageProcess(file);
-        //3. 保存处理结果
-        UriCheckResultReq checkResult = new UriCheckResultReq();
-        checkResult.setCheckResult(result);
-        checkResult.setCheckTime(new Date());
-        checkResult.setResultImagePath(filePath);
-        Boolean status = uriCheckResultService.addCheckResult(checkResult);
-        res.setResultData(status);
-        return res;
+        try {
+            //1. 保存文件
+            String filePath = uriCheckResultService.uploadMediaFile(file);
+            //2. 进行算法处理
+            String result = ImageProcess.imageProcess(file);
+            //3. 保存处理结果
+            UriCheckResultReq checkResult = new UriCheckResultReq();
+            checkResult.setCheckResult(result);
+            checkResult.setCheckTime(new Date());
+            checkResult.setResultImagePath(filePath);
+            checkResult.setUserId(userId);
+            Boolean status = uriCheckResultService.addCheckResult(checkResult);
+            res.setResultData(status);
+            return res;
+        } catch (Exception e) {
+            throw new BindException(e.getMessage());
+        }
     }
 
     @PostMapping("/selectrecordings")

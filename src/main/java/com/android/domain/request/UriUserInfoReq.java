@@ -52,7 +52,7 @@ public class UriUserInfoReq implements Serializable {
     /**
      * 患病时间（若有）
      */
-    private Date registrationTime;
+    private Date sickTime;
     /**
      * 关系类型RelationTypeEnum(PARENTS,父母;SELF,自己;BROTHER,兄弟;SISTER,姐妹;CHILDREN,子女;OTHERS,其他)
      */
@@ -62,6 +62,14 @@ public class UriUserInfoReq implements Serializable {
      * 用户编号(系统内部使用)
      */
     private String userCode;
+
+    public Date getSickTime() {
+        return sickTime;
+    }
+
+    public void setSickTime(Date sickTime) {
+        this.sickTime = sickTime;
+    }
 
     public String getUserCode() {
         return userCode;
@@ -135,13 +143,6 @@ public class UriUserInfoReq implements Serializable {
         this.everUriSick = everUriSick == null ? null : everUriSick.trim();
     }
 
-    public Date getRegistrationTime() {
-        return registrationTime;
-    }
-
-    public void setRegistrationTime(Date registrationTime) {
-        this.registrationTime = registrationTime;
-    }
 
     @Override
     public String toString() {
@@ -153,7 +154,7 @@ public class UriUserInfoReq implements Serializable {
                 ", userPhone='" + userPhone + '\'' +
                 ", userAddress='" + userAddress + '\'' +
                 ", everUriSick='" + everUriSick + '\'' +
-                ", registrationTime=" + registrationTime +
+                ", sickTime=" + sickTime +
                 ", relationType='" + relationType + '\'' +
                 ", userCode='" + userCode + '\'' +
                 '}';
