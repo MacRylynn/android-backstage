@@ -12,8 +12,8 @@ import java.io.Serializable;
  */
 public class ImageProcess implements Serializable {
 
-    // 调用算法处理
+    // todo 调用算法处理
     public static String imageProcess(MultipartFile file) {
-        return "test result";
+        return "[1,3,2,4,2,3,4,5,6,2,1,3]";
     }
 }
