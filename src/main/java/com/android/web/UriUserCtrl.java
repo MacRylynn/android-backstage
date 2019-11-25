@@ -45,9 +45,14 @@ public class UriUserCtrl {
         UriAccountInfoReq req = commonRequest.getRequestData();
         if (req.getAccountPassword().equals(req.getRepeatAccountPassword())) {
             Boolean result = uriUserService.addAccount(req);
+            if (!result) {
+                res.setResultMsg("此账号已存在，请输入新的注册账号");
+            }
             res.setResultData(result);
         } else {
-            throw new BusinessException("注册失败，两次输入的密码不正确！");
+            res.setResultMsg("注册失败，两次输入的密码不正确！");
+            res.setResultData(false);
+            return res;
         }
         return res;
     }

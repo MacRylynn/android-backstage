@@ -54,6 +54,10 @@ public class UriUserServiceImpl implements UriUserService {
         BeanUtils.copyProperties(req, uriAccountInfoEntity);
         uriAccountInfoEntity.setRegistrationTime(new Date());
         uriAccountInfoEntity.setUserCode(userCode);
+        UriAccountInfoEntity judge = uriAccountInfoMapper.selectByAccountNo(req.getAccountNo());
+        if (judge != null) {
+            return false;
+        }
         int res = uriAccountInfoMapper.insertSelective(uriAccountInfoEntity);
         return res == 1;
     }
@@ -145,7 +149,7 @@ public class UriUserServiceImpl implements UriUserService {
         logger.info("UriUserServiceImpl|modifyAccount,用户管理服务|修改账户信息，参数为：{}", req.toString());
         UriAccountInfoEntity uriAccountInfoEntity = new UriAccountInfoEntity();
         BeanUtils.copyProperties(req, uriAccountInfoEntity);
-        if (!req.getAccountPassword().equals(req.getRepeatAccountPassword())){
+        if (!req.getAccountPassword().equals(req.getRepeatAccountPassword())) {
             logger.error("UriUserServiceImpl|modifyAccount,用户管理服务|修改账户信息，两次输入的密码不一致");
             throw new BusinessException("修改失败，请验证两次密码输入是否一致");
         }
