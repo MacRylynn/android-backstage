@@ -4,6 +4,7 @@ import com.android.common.util.ImageProcess;
 import com.android.domain.base.CommonRequest;
 import com.android.domain.base.CommonResponse;
 import com.android.domain.request.UriCheckResultReq;
+import com.android.domain.request.UriDownLoadReq;
 import com.android.domain.request.UriUserInfoReq;
 import com.android.domain.response.UriCheckResultVo;
 import com.android.service.UriCheckResultService;
@@ -40,7 +41,7 @@ public class UriCheckResultCtrl {
     private UriCheckResultService uriCheckResultService;
 
     @PostMapping("/addcheckresult")
-    public CommonResponse<Long> addCheckResult(MultipartFile file,long userId) throws IOException {
+    public CommonResponse<Long> addCheckResult(MultipartFile file, long userId) throws IOException {
         logger.info("UriUserCtrl|addAccount，账户用户控制层|新增账户信息，入参为：{}", userId);
         CommonResponse<Long> res = new CommonResponse<>();
         //todo 开发
@@ -83,10 +84,10 @@ public class UriCheckResultCtrl {
         return res;
     }
 
-    @PostMapping(value = "/downloadfile/{id}")
-    public void downloadFile(@PathVariable("id") Long id, HttpServletResponse resp) throws IOException {
-        logger.info("EnterpriseInfoCtrl|downloadFile|合作方信息基础服务|下载文件|传入参数，查询id：{}", id);
-        UriCheckResultVo result = uriCheckResultService.queryCheckResultById(id);
+    @PostMapping(value = "/downloadfile")
+    public void downloadFile(@RequestBody CommonRequest<UriDownLoadReq> commonRequest,HttpServletResponse resp) throws IOException {
+        logger.info("EnterpriseInfoCtrl|downloadFile|合作方信息基础服务|下载文件|传入参数，查询id：{}", commonRequest.getRequestData().getId());
+        UriCheckResultVo result = uriCheckResultService.queryCheckResultById(commonRequest.getRequestData().getId());
         String filePath = result.getResultImagePath();
         String fileName = "检测结果";
         resp.setCharacterEncoding("utf-8");
