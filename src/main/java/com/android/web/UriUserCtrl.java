@@ -50,7 +50,7 @@ public class UriUserCtrl {
             }
             res.setResultData(result);
         } else {
-            res.setResultMsg("注册失败，两次输入的密码不正确！");
+            res.setResultMsg("注册失败，两次输入的密码不一致！");
             res.setResultData(false);
             return res;
         }
