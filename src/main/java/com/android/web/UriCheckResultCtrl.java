@@ -5,6 +5,7 @@ import com.android.domain.base.CommonRequest;
 import com.android.domain.base.CommonResponse;
 import com.android.domain.request.UriCheckResultReq;
 import com.android.domain.request.UriDownLoadReq;
+import com.android.domain.request.UriUploadReq;
 import com.android.domain.request.UriUserInfoReq;
 import com.android.domain.response.UriCheckResultVo;
 import com.android.service.UriCheckResultService;
@@ -41,21 +42,22 @@ public class UriCheckResultCtrl {
     private UriCheckResultService uriCheckResultService;
 
     @PostMapping("/addcheckresult")
-    public CommonResponse<Long> addCheckResult(MultipartFile file, long userId) throws IOException {
-        logger.info("UriUserCtrl|addAccount，账户用户控制层|新增账户信息，入参为：{}", userId);
+    public CommonResponse<Long> addCheckResult(@RequestBody CommonRequest<UriUploadReq> commonRequest) throws IOException {
+        logger.info("UriUserCtrl|addAccount，账户用户控制层|新增账户信息，入参为：{}", commonRequest.toString());
         CommonResponse<Long> res = new CommonResponse<>();
+        UriUploadReq uriUploadReq = commonRequest.getRequestData();
         //todo 开发
         try {
             //1. 保存文件
-            String filePath = uriCheckResultService.uploadMediaFile(file);
+            String filePath = uriCheckResultService.uploadMediaFile(uriUploadReq.getFile());
             //2. 进行算法处理
-            String result = ImageProcess.imageProcess(file);
+            String result = ImageProcess.imageProcess(uriUploadReq.getFile());
             //3. 保存处理结果
             UriCheckResultReq checkResult = new UriCheckResultReq();
             checkResult.setCheckResult(result);
             checkResult.setCheckTime(new Date());
             checkResult.setResultImagePath(filePath);
-            checkResult.setUserId(userId);
+            checkResult.setUserId(Long.valueOf(uriUploadReq.getUserId()));
             Long status = uriCheckResultService.addCheckResult(checkResult);
             res.setResultData(status);
             return res;
@@ -85,7 +87,7 @@ public class UriCheckResultCtrl {
     }
 
     @PostMapping(value = "/downloadfile")
-    public void downloadFile(@RequestBody CommonRequest<UriDownLoadReq> commonRequest,HttpServletResponse resp) throws IOException {
+    public void downloadFile(@RequestBody CommonRequest<UriDownLoadReq> commonRequest, HttpServletResponse resp) throws IOException {
         logger.info("EnterpriseInfoCtrl|downloadFile|合作方信息基础服务|下载文件|传入参数，查询id：{}", commonRequest.getRequestData().getId());
         UriCheckResultVo result = uriCheckResultService.queryCheckResultById(commonRequest.getRequestData().getId());
         String filePath = result.getResultImagePath();
