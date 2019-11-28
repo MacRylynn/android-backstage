@@ -5,7 +5,6 @@ import com.android.domain.base.CommonRequest;
 import com.android.domain.base.CommonResponse;
 import com.android.domain.request.UriCheckResultReq;
 import com.android.domain.request.UriDownLoadReq;
-import com.android.domain.request.UriUploadReq;
 import com.android.domain.request.UriUserInfoReq;
 import com.android.domain.response.UriCheckResultVo;
 import com.android.service.UriCheckResultService;
@@ -14,7 +13,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
@@ -42,22 +40,21 @@ public class UriCheckResultCtrl {
     private UriCheckResultService uriCheckResultService;
 
     @PostMapping("/addcheckresult")
-    public CommonResponse<Long> addCheckResult(@RequestBody CommonRequest<UriUploadReq> commonRequest) throws IOException {
-        logger.info("UriUserCtrl|addAccount，账户用户控制层|新增账户信息，入参为：{}", commonRequest.toString());
+    public CommonResponse<Long> addCheckResult(MultipartFile file, String userId) throws IOException {
+        logger.info("UriUserCtrl|addAccount，账户用户控制层|新增账户信息，入参为：{}", userId);
         CommonResponse<Long> res = new CommonResponse<>();
-        UriUploadReq uriUploadReq = commonRequest.getRequestData();
         //todo 开发
         try {
             //1. 保存文件
-            String filePath = uriCheckResultService.uploadMediaFile(uriUploadReq.getFile());
+            String filePath = uriCheckResultService.uploadMediaFile(file);
             //2. 进行算法处理
-            String result = ImageProcess.imageProcess(uriUploadReq.getFile());
+            String result = ImageProcess.imageProcess(file);
             //3. 保存处理结果
             UriCheckResultReq checkResult = new UriCheckResultReq();
             checkResult.setCheckResult(result);
             checkResult.setCheckTime(new Date());
             checkResult.setResultImagePath(filePath);
-            checkResult.setUserId(Long.valueOf(uriUploadReq.getUserId()));
+            checkResult.setUserId(Long.valueOf(userId));
             Long status = uriCheckResultService.addCheckResult(checkResult);
             res.setResultData(status);
             return res;
