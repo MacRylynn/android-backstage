@@ -183,6 +183,18 @@
             <artifactId>okhttp</artifactId>
             <version>3.3.0</version>
         </dependency>
+        <!--    opencv-->
+        <dependency>
+            <groupId>org.opencv</groupId>
+            <artifactId>opencv</artifactId>
+            <version>3.4.7</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/gov.nist.math/jama -->
+        <dependency>
+            <groupId>gov.nist.math</groupId>
+            <artifactId>jama</artifactId>
+            <version>1.0.3</version>
+        </dependency>
     </dependencies>
 
     <build>
